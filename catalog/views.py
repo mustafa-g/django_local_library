@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
+from django.views import generic
+
 # Create your views here.
 def index(request):
     """View function for home page of site."""
@@ -21,4 +23,12 @@ def index(request):
         "num_book_white": num_book_white,
     }
 
-    return render(request, 'index.html', context=context)
+    return render(request, 'catalog/index.html', context=context)
+
+
+class BookListView(generic.ListView):
+    model = Book
+
+
+class  BookDetailView(generic.DetailView):
+    model = Book
